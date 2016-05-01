@@ -16,8 +16,7 @@ typedef struct _Array
 
 int main(int argc, char const *argv[])
 {
-	int a = 10;
-	const int *y = &a;
+	unsigned long long int y = 10;
 	printType(y);
 	return 0;
 }

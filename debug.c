@@ -21,3 +21,6 @@ void debug_const_string(const char *a) {
 void debug_other(void *a) {
 	printf("unknown");
 }
+void debug_lint(unsigned long long int a) {
+	printf("unsigned long long int:\t%lld\n", a);
+}
