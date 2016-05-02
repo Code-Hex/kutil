@@ -22,10 +22,7 @@ void _new_array(void *array, ...)
 	array_init((void_array *)array);
 	va_start(args, array);
 	while ((arg = va_arg(args, void *)) != NULL)
-	{
-		//printf("%s\n", arg);
 		push((void_array *)array, arg);
-	}
 
 	va_end(args);
 }
@@ -34,5 +31,13 @@ int main(int argc, char const *argv[])
 {
 	string_array ary;
 	new_array(&ary, "Hello", ", ", "Worldwww", "!!", "se", "deed");
+	push(&ary, "Hel!!");
+	char *val;
+	printf("%s\n", pop(&ary));
+
+	foreach(&ary, val) {
+		printf("%s\n", val);
+	}
+
 	return 0;
 }

@@ -43,10 +43,33 @@ typedef array_typeinit(double) double_array;
 	(void **)&(a)->data, &(a)->count, &(a)->size, sizeof(*(a)->data)
 
 #define typecast(a) __typeof__(a)
+#define count(a) (a)->count
+#define first(a) (a)->data[0]
+#define last(a) (a)->data[(a)->count - 1]
 
 #define push(a, val)		\
 	dynalloc(unpack(a)) ?	\
 		((a)->data[(a)->count++] = (val)) : 0;
+
+#define pop(a) (a)->data[--(a)->count]
+
+#define each(a, var, iter) \
+		for ((iter) = 0; ((var) = (a)->data[(iter)]) && (iter) < count(a); (iter)++)
+
+#define foreach(a, var) \
+		for (int _ = 0; ((var) = (a)->data[_]) && _ < count(a); _++)
+
+/*
+#define _new_array(array, ...)									\
+({																\
+	array_init((void_array *)array);							\
+	int n = (sizeof((int []){__VA_ARGS__}) / sizeof(int));		\
+	(array)->data = calloc(n, sizeof(typecast((array)->data))); \
+	(array)->size = n << 1;										\
+	(array)->count = n;											\
+	(array)->data = {__VA_ARGS__};								\
+})
+*/
 
 void _new_array(void *array, ...);
 int dynalloc(void **data, int *count, int *size, int msize);
